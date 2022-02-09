@@ -1,6 +1,6 @@
 [package]
 name = "yi"
-version = "0.1.0"
+version = "0.1.1"
 description = "Yi Token by Crate Protocol: the standard for auto-compounding single token staking pools."
 edition = "2021"
 homepage = "https://crate.so"
