@@ -1,0 +1,30 @@
+[package]
+name = "yi"
+version = "0.1.0"
+description = "Yi Token by Crate Protocol: the standard for auto-compounding single token staking pools."
+edition = "2021"
+homepage = "https://crate.so"
+repository = "https://github.com/CrateProtocol/yi"
+authors = ["Jennifer Zhang <jen@crate.so>"]
+license = "AGPL-3.0"
+keywords = ["solana", "anchor", "crate"]
+
+[lib]
+crate-type = ["cdylib", "lib"]
+name = "yi"
+path = "src/lib.rs"
+
+[features]
+no-entrypoint = []
+no-idl = []
+cpi = ["no-entrypoint"]
+default = []
+
+[dependencies]
+anchor-lang = ">=0.17, <0.21"
+anchor-spl = ">=0.17, <0.21"
+num-traits = "0.2"
+vipers = "1.5.9"
+
+[dev-dependencies]
+proptest = "1.0.0"

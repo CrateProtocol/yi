@@ -1,0 +1,21 @@
+anchor_version = "0.20.1"
+solana_version = "1.8.14"
+
+[scripts]
+test = "yarn mocha"
+
+[provider]
+cluster = "localnet"
+wallet = "./tests/test-key.json"
+
+[programs.localnet]
+yi = "YiiTopEnX2vyoWdXuG45ovDFYZars4XZ4w6td6RVTFm"
+
+[programs.devnet]
+yi = "YiiTopEnX2vyoWdXuG45ovDFYZars4XZ4w6td6RVTFm"
+
+[programs.testnet]
+yi = "YiiTopEnX2vyoWdXuG45ovDFYZars4XZ4w6td6RVTFm"
+
+[programs.mainnet]
+yi = "YiiTopEnX2vyoWdXuG45ovDFYZars4XZ4w6td6RVTFm"

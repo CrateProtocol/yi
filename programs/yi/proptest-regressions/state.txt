@@ -1,0 +1,7 @@
+# Seeds for failure cases proptest has generated in the past. It is
+# automatically read and these particular cases re-run before any
+# novel cases are generated.
+#
+# It is recommended to check this file in to source control so that
+# everyone who runs the test benefits from these saved cases.
+cc c98e65ab48f8daf12e3be3129b780c58fa4f0c90ecf706cd123924c5f22373e9 # shrinks to initial_underlying_tokens = 0, amounts = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 11291227409, 1999579336891593120, 3943698091509655573, 9194507251650982579, 8453337742070481001, 4283148525876672558, 4308240882386005468, 8202534479340922393, 2395933935110631125, 1032239863744300530, 5753119144908493692, 8220185079717309726, 437202677997538416, 3110587528742518778, 6496052223286700793, 5915869462825862920, 1624249946447621013]
