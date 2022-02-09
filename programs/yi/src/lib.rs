@@ -1,5 +1,20 @@
 //! Yi Token by Crate Protocol: the standard for auto-compounding single token staking pools.
 //!
+//! # Usage
+//!
+//! First, create a Yi Token by invoking the [`yi::create_yi_token`] instruction. Then, anyone may stake
+//! tokens into the pool via [`yi::stake`].
+//!
+//! To send auto-compounded rewards to the pool, deposit tokens to the [`YiToken::underlying_tokens`] token account.
+//! This will increase the conversion rate of Yi Tokens to underlying tokens.
+//!
+//! To exit the pool, invoke [`yi::unstake`].
+//!
+//! ## Fees
+//!
+//! Yi Tokens may take stake or unstake fees. These fees cannot be changed after the construction of the Yi Token. Fees get distributed
+//! to stakers within the Yi Token pool.
+//!
 //! # Packages
 //!
 //! - NPM Package: [`@crateprotocol/yi`](https://www.npmjs.com/package/@crateprotocol/yi)
