@@ -121,3 +121,57 @@ jobs:
       - run: yarn build
       - name: Run e2e tests
         run: nix shell .#ci --command yarn test:e2e
+
+  soteria:
+    name: Soteria Scan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      # Install Cachix
+      - uses: cachix/install-nix-action@v16
+      - name: Setup Cachix
+        uses: cachix/cachix-action@v10
+        with:
+          name: crate
+          extraPullNames: saber
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+
+      # Install Solana
+      - name: Cache Solana binaries
+        id: solana-cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.cache/solana
+            ~/.local/share/solana/install
+          key: ${{ runner.os }}-${{ env.SOLANA_VERSION }}
+      - name: Install Solana
+        if: steps.solana-cache.outputs.cache-hit != 'true'
+        run: |
+          nix shell .#ci --command solana-install init ${{ env.SOLANA_VERSION }}
+      - name: Setup Solana Path
+        run: |
+          echo "$HOME/.local/share/solana/install/active_release/bin" >> $GITHUB_PATH
+          export PATH="/home/runner/.local/share/solana/install/active_release/bin:$PATH"
+          solana --version
+
+      - name: Cache Soteria Build
+        uses: Swatinem/rust-cache@v1
+        with:
+          target-dir: programs/yi/.coderrect/build # Cache build files for performance
+
+      - name: Download Soteria # Always grab the latest version
+        run: |
+          echo Downloading Soteria... 🔬
+          sh -c "$(curl -k https://supercompiler.xyz/install)"
+          export PATH=$PWD/soteria-linux-develop/bin/:$PATH
+          echo "$PWD/soteria-linux-develop/bin" >> $GITHUB_PATH
+        shell: bash
+
+      - name: Run Soteria
+        run: |
+          echo Running Soteria...
+          cd programs/yi/
+          soteria -analyzeAll .
+        shell: bash
