@@ -168,13 +168,12 @@ jobs:
           export PATH=$PWD/soteria-linux-develop/bin/:$PATH
           echo "$PWD/soteria-linux-develop/bin" >> $GITHUB_PATH
 
+      - name: Configuring bpf toolchain...
+        run: |
+          cd $HOME/.local/share/solana/install/active_release/bin/sdk/bpf/scripts
+          bash ./install.sh
+          rustup toolchain list
       - name: Run Soteria
         run: |
-          rustup toolchain list
-          echo Configuring bpf toolchain...
-          bash "$HOME/.local/share/solana/install/active_release/bin/sdk/bpf/scripts/install.sh"
-          rustup toolchain list
-
-          echo Running Soteria...
           cd programs/yi/
           soteria -analyzeAll .
