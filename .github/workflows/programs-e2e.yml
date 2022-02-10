@@ -155,8 +155,6 @@ jobs:
           echo "$HOME/.local/share/solana/install/active_release/bin" >> $GITHUB_PATH
           export PATH="/home/runner/.local/share/solana/install/active_release/bin:$PATH"
           solana --version
-          echo Configuring bpf toolchain...
-          (cd /home/runner/.local/share/solana/install/active_release/bin/sdk/bpf/scripts; ./install.sh)
 
       - name: Cache Soteria Build
         uses: Swatinem/rust-cache@v1
@@ -169,11 +167,12 @@ jobs:
           sh -c "$(curl -k https://supercompiler.xyz/install)"
           export PATH=$PWD/soteria-linux-develop/bin/:$PATH
           echo "$PWD/soteria-linux-develop/bin" >> $GITHUB_PATH
-        shell: bash
 
       - name: Run Soteria
         run: |
+          echo Configuring bpf toolchain...
+          bash "$HOME/.local/share/solana/install/active_release/bin/sdk/bpf/scripts/install.sh"
+
           echo Running Soteria...
           cd programs/yi/
           soteria -analyzeAll .
-        shell: bash
