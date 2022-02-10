@@ -1,4 +1,14 @@
-//! Yi Token by Crate Protocol: the standard for auto-compounding single token staking pools.
+//! Yi Token by Crate Protocol: the primitive for auto-compounding single token staking pools.
+//!
+//! # About
+//!
+//! **Yi** is a Solana primitive for building single-sided, auto-compounded stake pools. It allows
+//! projects to launch *Yi Tokens*, which are tokens convertible to and from an underlying token.
+//!
+//! Some example use cases include:
+//!
+//! - *Governance token staking.* Protocols may want their governance token to be staked, where fees are converted into the governance token. An example of this is the XSUSHI pool in Sushiswap.
+//! - *Interest-bearing derivatives.* A protocol may collect revenue in a token that it wants users to stake, so it may pay fees out by compounding that token. An example of this is Anchor UST.
 //!
 //! # Usage
 //!
