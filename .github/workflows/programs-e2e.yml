@@ -155,6 +155,8 @@ jobs:
           echo "$HOME/.local/share/solana/install/active_release/bin" >> $GITHUB_PATH
           export PATH="/home/runner/.local/share/solana/install/active_release/bin:$PATH"
           solana --version
+          echo Configuring bpf toolchain...
+          (cd /home/runner/.local/share/solana/install/active_release/bin/sdk/bpf/scripts; ./install.sh)
 
       - name: Cache Soteria Build
         uses: Swatinem/rust-cache@v1
