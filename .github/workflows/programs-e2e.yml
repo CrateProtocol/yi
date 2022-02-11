@@ -138,7 +138,7 @@ jobs:
             ~/.rustup
             ~/.cache/solana
             ~/.local/share/solana
-          key: solana-v${{ env.SOLANA_VERSION }}
+          key: solana-${{ runner.os }}-${{ env.SOLANA_VERSION }}
 
       - name: Cache Soteria Build
         uses: Swatinem/rust-cache@v1
