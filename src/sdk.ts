@@ -114,7 +114,7 @@ export class YiSDK {
   }
 
   /**
-   * Stakes Yi tokens.
+   * Stakes underlying tokens for Yi tokens.
    * @returns
    */
   async stake({
@@ -140,7 +140,7 @@ export class YiSDK {
       owner: authority,
     });
     return this.provider.newTX([
-      ...authorityATAs.instructions,
+      authorityATAs.createAccountInstructions.yi,
       this.programs.Yi.instruction.stake(amount, {
         accounts: {
           yiToken,
