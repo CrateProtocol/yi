@@ -122,7 +122,13 @@ export class YiSDK {
     amount,
     authority = this.provider.wallet.publicKey,
   }: {
+    /**
+     * Mint of the Yi token.
+     */
     yiTokenMint: PublicKey;
+    /**
+     * Amount of underlying tokens to stake.
+     */
     amount: u64;
     /**
      * Authority staking tokens.
