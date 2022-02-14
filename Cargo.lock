@@ -1700,7 +1700,7 @@ checksum = "9fc79f4a1e39857fc00c3f662cbf2651c771f00e9c15fe2abc341806bd46bd71"
 name = "yi"
 version = "0.1.2"
 dependencies = [
- "anchor-lang 0.20.1",
+ "anchor-lang 0.21.0",
  "anchor-spl 0.20.1",
  "num-traits",
  "proptest",
