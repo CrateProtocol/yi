@@ -12,16 +12,16 @@ pub struct Unstake<'info> {
 
     /// [YiToken::mint]. [Mint] of the [YiToken].
     #[account(mut)]
-    pub yi_mint: Box<Account<'info, Mint>>,
+    pub yi_mint: Account<'info, Mint>,
     /// [YiToken]s to be burned.
     #[account(mut)]
-    pub source_yi_tokens: Box<Account<'info, TokenAccount>>,
+    pub source_yi_tokens: Account<'info, TokenAccount>,
     /// The [TokenAccount::owner] of [Self::source_yi_tokens].
     pub source_authority: Signer<'info>,
 
     /// [YiToken::underlying_tokens].
     #[account(mut)]
-    pub yi_underlying_tokens: Box<Account<'info, TokenAccount>>,
+    pub yi_underlying_tokens: Account<'info, TokenAccount>,
     /// The [TokenAccount] receiving the underlying tokens.
     #[account(mut)]
     pub destination_underlying_tokens: Box<Account<'info, TokenAccount>>,

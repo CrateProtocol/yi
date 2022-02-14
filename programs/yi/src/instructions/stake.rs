@@ -13,16 +13,16 @@ pub struct Stake<'info> {
 
     /// [YiToken::mint]. [Mint] of the [YiToken].
     #[account(mut)]
-    pub yi_mint: Box<Account<'info, Mint>>,
+    pub yi_mint: Account<'info, Mint>,
 
     /// Tokens to be staked into the [YiToken].
     #[account(mut)]
-    pub source_tokens: Box<Account<'info, TokenAccount>>,
+    pub source_tokens: Account<'info, TokenAccount>,
     /// The [TokenAccount::owner] of [Self::source_tokens].
     pub source_authority: Signer<'info>,
     /// [YiToken::underlying_tokens].
     #[account(mut)]
-    pub yi_underlying_tokens: Box<Account<'info, TokenAccount>>,
+    pub yi_underlying_tokens: Account<'info, TokenAccount>,
 
     /// The [TokenAccount] receiving the minted [YiToken]s.
     #[account(mut)]
