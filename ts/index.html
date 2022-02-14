@@ -1,4 +1,4 @@
-<!DOCTYPE html><html class="default"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>@crateprotocol/yi - v0.1.1</title><meta name="description" content="Documentation for @crateprotocol/yi - v0.1.1"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="assets/style.css"/><link rel="stylesheet" href="assets/highlight.css"/><script async src="assets/search.js" id="search-script"></script></head><body><script>document.body.classList.add(localStorage.getItem("tsd-theme") || "os")</script><header><div class="tsd-page-toolbar"><div class="container"><div class="table-wrap"><div class="table-cell" id="tsd-search" data-base="."><div class="field"><label for="tsd-search-field" class="tsd-widget search no-caption">Search</label><input type="text" id="tsd-search-field"/></div><ul class="results"><li class="state loading">Preparing search index...</li><li class="state failure">The search index is not available</li></ul><a href="index.html" class="title">@crateprotocol/yi - v0.1.1</a></div><div class="table-cell" id="tsd-widgets"><div id="tsd-filter"><a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a><div class="tsd-filter-group"><div class="tsd-select" id="tsd-filter-visibility"><span class="tsd-select-label">All</span><ul class="tsd-select-list"><li data-value="public">Public</li><li data-value="protected">Public/Protected</li><li data-value="private" class="selected">All</li></ul></div> <input type="checkbox" id="tsd-filter-inherited" checked/><label class="tsd-widget" for="tsd-filter-inherited">Inherited</label><input type="checkbox" id="tsd-filter-externals" checked/><label class="tsd-widget" for="tsd-filter-externals">Externals</label></div></div><a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a></div></div></div></div><div class="tsd-page-title"><div class="container"><h1>@crateprotocol/yi - v0.1.1</h1></div></div></header><div class="container container-main"><div class="row"><div class="col-8 col-content"><div class="tsd-panel tsd-typography">
+<!DOCTYPE html><html class="default"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>@crateprotocol/yi - v0.1.2</title><meta name="description" content="Documentation for @crateprotocol/yi - v0.1.2"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="assets/style.css"/><link rel="stylesheet" href="assets/highlight.css"/><script async src="assets/search.js" id="search-script"></script></head><body><script>document.body.classList.add(localStorage.getItem("tsd-theme") || "os")</script><header><div class="tsd-page-toolbar"><div class="container"><div class="table-wrap"><div class="table-cell" id="tsd-search" data-base="."><div class="field"><label for="tsd-search-field" class="tsd-widget search no-caption">Search</label><input type="text" id="tsd-search-field"/></div><ul class="results"><li class="state loading">Preparing search index...</li><li class="state failure">The search index is not available</li></ul><a href="index.html" class="title">@crateprotocol/yi - v0.1.2</a></div><div class="table-cell" id="tsd-widgets"><div id="tsd-filter"><a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a><div class="tsd-filter-group"><div class="tsd-select" id="tsd-filter-visibility"><span class="tsd-select-label">All</span><ul class="tsd-select-list"><li data-value="public">Public</li><li data-value="protected">Public/Protected</li><li data-value="private" class="selected">All</li></ul></div> <input type="checkbox" id="tsd-filter-inherited" checked/><label class="tsd-widget" for="tsd-filter-inherited">Inherited</label><input type="checkbox" id="tsd-filter-externals" checked/><label class="tsd-widget" for="tsd-filter-externals">Externals</label></div></div><a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a></div></div></div></div><div class="tsd-page-title"><div class="container"><h1>@crateprotocol/yi - v0.1.2</h1></div></div></header><div class="container container-main"><div class="row"><div class="col-8 col-content"><div class="tsd-panel tsd-typography">
 <a href="#yi" id="yi" style="color: inherit; text-decoration: none;">
   <h1>yi</h1>
 </a>
@@ -12,7 +12,33 @@
     <img src="https://raw.githubusercontent.com/CrateProtocol/yi/master/images/banner.png" />
 </p>
 
-<p>Yi Token by Crate Protocol: the standard for auto-compounding single token staking pools.</p>
+<p>Yi Token by Crate Protocol: the primitive for auto-compounding single token staking pools.</p>
+
+<a href="#about" id="about" style="color: inherit; text-decoration: none;">
+  <h2>About</h2>
+</a>
+<p><strong>Yi</strong> is a Solana primitive for building single-sided, auto-compounded stake pools. It allows
+projects to launch <em>Yi Tokens</em>, which are tokens convertible to and from an underlying token.</p>
+<p>Some example use cases include:</p>
+<ul>
+<li><em>Governance token staking.</em> Protocols may want their governance token to be staked, where fees are converted into the governance token. An example of this is the XSUSHI pool in Sushiswap.</li>
+<li><em>Interest-bearing derivatives.</em> A protocol may collect revenue in a token that it wants users to stake, so it may pay fees out by compounding that token. An example of this is Anchor UST.</li>
+</ul>
+
+<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
+  <h2>Usage</h2>
+</a>
+<p>First, create a Yi Token by invoking the [<code>yi::create_yi_token</code>] instruction. Then, anyone may stake
+tokens into the pool via [<code>yi::stake</code>].</p>
+<p>To send auto-compounded rewards to the pool, deposit tokens to the [<code>YiToken::underlying_tokens</code>] token account.
+This will increase the conversion rate of Yi Tokens to underlying tokens.</p>
+<p>To exit the pool, invoke [<code>yi::unstake</code>].</p>
+
+<a href="#fees" id="fees" style="color: inherit; text-decoration: none;">
+  <h3>Fees</h3>
+</a>
+<p>Yi Tokens may take stake or unstake fees. These fees cannot be changed after the construction of the Yi Token. Fees get distributed
+to stakers within the Yi Token pool.</p>
 
 <a href="#packages" id="packages" style="color: inherit; text-decoration: none;">
   <h2>Packages</h2>
