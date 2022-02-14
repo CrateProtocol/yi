@@ -6,7 +6,6 @@ use vipers::prelude::*;
 
 /// Accounts for [yi::create_yi_token].
 #[derive(Accounts)]
-#[instruction(bump: u8)]
 pub struct CreateYiToken<'info> {
     /// The [Mint] of the [YiToken].
     pub mint: Account<'info, Mint>,
