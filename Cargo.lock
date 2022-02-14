@@ -308,18 +308,6 @@ dependencies = [
 
 [[package]]
 name = "anchor-spl"
-version = "0.20.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9ea94b04fc9a0aaae4d4473b0595fb5f55b6c9b38e0d6f596df8c8060f95f096"
-dependencies = [
- "anchor-lang 0.20.1",
- "solana-program",
- "spl-associated-token-account",
- "spl-token",
-]
-
-[[package]]
-name = "anchor-spl"
 version = "0.21.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "cc245f1d18992ad44236dc15717a9875e1184a164b931c506ba9dc7a2258804f"
@@ -1570,7 +1558,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "aa8c839e2a15777b45909d05ab3eeaaa3035b43241b404345c9cd999ed30df09"
 dependencies = [
  "anchor-lang 0.21.0",
- "anchor-spl 0.21.0",
+ "anchor-spl",
  "spl-associated-token-account",
 ]
 
@@ -1701,7 +1689,7 @@ name = "yi"
 version = "0.1.2"
 dependencies = [
  "anchor-lang 0.20.1",
- "anchor-spl 0.20.1",
+ "anchor-spl",
  "num-traits",
  "proptest",
  "vipers",
