@@ -18,7 +18,7 @@ pub struct CreateYiToken<'info> {
             b"YiToken".as_ref(),
             mint.key().as_ref()
         ],
-        bump = bump,
+        bump,
         payer = payer
     )]
     pub yi_token: AccountLoader<'info, YiToken>,
@@ -64,12 +64,14 @@ impl<'info> CreateYiToken<'info> {
 
 pub fn handler(
     ctx: Context<CreateYiToken>,
-    bump: u8,
     stake_fee_millibps: u32,
     unstake_fee_millibps: u32,
 ) -> ProgramResult {
-    ctx.accounts
-        .create_yi_token(bump, stake_fee_millibps, unstake_fee_millibps)
+    ctx.accounts.create_yi_token(
+        *unwrap_int!(ctx.bumps.get("yi_token")),
+        stake_fee_millibps,
+        unstake_fee_millibps,
+    )
 }
 
 impl<'info> Validate<'info> for CreateYiToken<'info> {
