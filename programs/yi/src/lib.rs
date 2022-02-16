@@ -64,7 +64,7 @@ pub mod yi {
 
     /// Creates a [YiToken].
     #[access_control(ctx.accounts.validate())]
-    pub fn create_yi_token(ctx: Context<CreateYiToken>, _bump: u8) -> ProgramResult {
+    pub fn create_yi_token(ctx: Context<CreateYiToken>) -> ProgramResult {
         create_yi_token::handler(ctx, 0, 0)
     }
 
@@ -73,7 +73,6 @@ pub mod yi {
     #[access_control(ctx.accounts.validate())]
     pub fn create_yi_token_with_fees(
         ctx: Context<CreateYiToken>,
-        _bump: u8,
         stake_fee_millibps: u32,
         unstake_fee_millibps: u32,
     ) -> ProgramResult {
