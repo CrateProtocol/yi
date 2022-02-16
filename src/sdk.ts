@@ -74,7 +74,7 @@ export class YiSDK {
     mint: PublicKey;
     yiToken: PublicKey;
   }> {
-    const [yiToken, bump] = await findYiTokenAddress(mintKP.publicKey);
+    const [yiToken] = await findYiTokenAddress(mintKP.publicKey);
     const underlyingTokens = await getOrCreateATA({
       provider: this.provider,
       mint: underlyingToken.mintAccount,
@@ -94,7 +94,6 @@ export class YiSDK {
         this.provider.newTX([
           underlyingTokens.instruction,
           this.programs.Yi.instruction.createYiTokenWithFees(
-            bump,
             stakeFeeMillibps,
             unstakeFeeMillibps,
             {
