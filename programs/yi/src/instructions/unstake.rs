@@ -31,7 +31,7 @@ pub struct Unstake<'info> {
 }
 
 impl<'info> Unstake<'info> {
-    fn withdraw_underlying(&self, amount: u64) -> ProgramResult {
+    fn withdraw_underlying(&self, amount: u64) -> Result<()> {
         let yi_token = self.yi_token.load()?;
         let signer_seeds: &[&[&[u8]]] = yitoken_seeds!(yi_token);
         token::transfer(
@@ -48,7 +48,7 @@ impl<'info> Unstake<'info> {
         )
     }
 
-    fn burn_yi_tokens(&self, yitoken_amount: u64) -> ProgramResult {
+    fn burn_yi_tokens(&self, yitoken_amount: u64) -> Result<()> {
         token::burn(
             CpiContext::new(
                 self.token_program.to_account_info(),
@@ -62,7 +62,7 @@ impl<'info> Unstake<'info> {
         )
     }
 
-    pub(crate) fn unstake(&self, yitoken_amount: u64) -> ProgramResult {
+    pub(crate) fn unstake(&self, yitoken_amount: u64) -> Result<()> {
         let yi_token = self.yi_token.load()?;
 
         self.burn_yi_tokens(yitoken_amount)?;
@@ -76,7 +76,7 @@ impl<'info> Unstake<'info> {
     }
 }
 
-pub fn handler(ctx: Context<Unstake>, yitoken_amount: u64) -> ProgramResult {
+pub fn handler(ctx: Context<Unstake>, yitoken_amount: u64) -> Result<()> {
     // short circuit if no amount specified
     if yitoken_amount == 0 {
         return Ok(());
@@ -85,7 +85,7 @@ pub fn handler(ctx: Context<Unstake>, yitoken_amount: u64) -> ProgramResult {
 }
 
 impl<'info> Validate<'info> for Unstake<'info> {
-    fn validate(&self) -> ProgramResult {
+    fn validate(&self) -> Result<()> {
         let yi_token = self.yi_token.load()?;
         assert_keys_eq!(self.yi_mint, yi_token.mint);
         assert_keys_eq!(self.source_yi_tokens.mint, self.yi_mint);

@@ -64,7 +64,7 @@ pub mod yi {
 
     /// Creates a [YiToken].
     #[access_control(ctx.accounts.validate())]
-    pub fn create_yi_token(ctx: Context<CreateYiToken>) -> ProgramResult {
+    pub fn create_yi_token(ctx: Context<CreateYiToken>) -> Result<()> {
         create_yi_token::handler(ctx, 0, 0)
     }
 
@@ -75,25 +75,25 @@ pub mod yi {
         ctx: Context<CreateYiToken>,
         stake_fee_millibps: u32,
         unstake_fee_millibps: u32,
-    ) -> ProgramResult {
+    ) -> Result<()> {
         create_yi_token::handler(ctx, stake_fee_millibps, unstake_fee_millibps)
     }
 
     /// Stakes underlying tokens for yiTokens.
     #[access_control(ctx.accounts.validate())]
-    pub fn stake(ctx: Context<Stake>, amount: u64) -> ProgramResult {
+    pub fn stake(ctx: Context<Stake>, amount: u64) -> Result<()> {
         stake::handler(ctx, amount)
     }
 
     /// Unstakes yiTokens for their underlying tokens.
     #[access_control(ctx.accounts.validate())]
-    pub fn unstake(ctx: Context<Unstake>, amount: u64) -> ProgramResult {
+    pub fn unstake(ctx: Context<Unstake>, amount: u64) -> Result<()> {
         unstake::handler(ctx, amount)
     }
 }
 
 /// Errors.
-#[error]
+#[error_code]
 pub enum ErrorCode {
     #[msg("Decimal mismatch.")]
     DecimalMismatch,

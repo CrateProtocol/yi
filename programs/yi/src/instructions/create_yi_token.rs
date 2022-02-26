@@ -42,7 +42,7 @@ impl<'info> CreateYiToken<'info> {
         bump: u8,
         stake_fee_millibps: u32,
         unstake_fee_millibps: u32,
-    ) -> ProgramResult {
+    ) -> Result<()> {
         let yi_token = &mut self.yi_token.load_init()?;
         yi_token.mint = self.mint.key();
         yi_token.bump = bump;
@@ -65,7 +65,7 @@ pub fn handler(
     ctx: Context<CreateYiToken>,
     stake_fee_millibps: u32,
     unstake_fee_millibps: u32,
-) -> ProgramResult {
+) -> Result<()> {
     ctx.accounts.create_yi_token(
         *unwrap_int!(ctx.bumps.get("yi_token")),
         stake_fee_millibps,
@@ -74,7 +74,7 @@ pub fn handler(
 }
 
 impl<'info> Validate<'info> for CreateYiToken<'info> {
-    fn validate(&self) -> ProgramResult {
+    fn validate(&self) -> Result<()> {
         assert_keys_eq!(self.mint.mint_authority.unwrap(), self.yi_token);
         assert_keys_eq!(self.mint.freeze_authority.unwrap(), self.yi_token);
         invariant!(self.mint.supply == 0);
