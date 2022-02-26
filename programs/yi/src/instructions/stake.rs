@@ -33,7 +33,7 @@ pub struct Stake<'info> {
 }
 
 impl<'info> Stake<'info> {
-    fn deposit_underlying(&self, amount: u64) -> ProgramResult {
+    fn deposit_underlying(&self, amount: u64) -> Result<()> {
         token::transfer(
             CpiContext::new(
                 self.token_program.to_account_info(),
@@ -47,7 +47,7 @@ impl<'info> Stake<'info> {
         )
     }
 
-    fn mint_yi_tokens(&self, amount: u64) -> ProgramResult {
+    fn mint_yi_tokens(&self, amount: u64) -> Result<()> {
         let yi_token = self.yi_token.load()?;
         let signer_seeds: &[&[&[u8]]] = yitoken_seeds!(yi_token);
         token::mint_to(
@@ -64,7 +64,7 @@ impl<'info> Stake<'info> {
         )
     }
 
-    pub(crate) fn stake(&self, underlying_amount: u64) -> ProgramResult {
+    pub(crate) fn stake(&self, underlying_amount: u64) -> Result<()> {
         let yi_token = self.yi_token.load()?;
         self.deposit_underlying(underlying_amount)?;
         let mint_amount = unwrap_int!(yi_token.calculate_yitokens_for_underlying(
@@ -77,7 +77,7 @@ impl<'info> Stake<'info> {
     }
 }
 
-pub fn handler(ctx: Context<Stake>, underlying_amount: u64) -> ProgramResult {
+pub fn handler(ctx: Context<Stake>, underlying_amount: u64) -> Result<()> {
     // short circuit if no amount specified
     if underlying_amount == 0 {
         return Ok(());
@@ -86,7 +86,7 @@ pub fn handler(ctx: Context<Stake>, underlying_amount: u64) -> ProgramResult {
 }
 
 impl<'info> Validate<'info> for Stake<'info> {
-    fn validate(&self) -> ProgramResult {
+    fn validate(&self) -> Result<()> {
         let yi_token = self.yi_token.load()?;
         assert_keys_eq!(self.yi_mint, yi_token.mint);
         assert_keys_eq!(self.source_tokens.mint, yi_token.underlying_token_mint);
