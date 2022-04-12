@@ -22,7 +22,7 @@ default = []
 
 [dependencies]
 anchor-lang = "^0.22"
-anchor-spl = "^0.22"
+anchor-spl = "^0.24"
 num-traits = "0.2"
 vipers = "^2.0"
 
