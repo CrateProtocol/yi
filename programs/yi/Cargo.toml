@@ -21,7 +21,7 @@ cpi = ["no-entrypoint"]
 default = []
 
 [dependencies]
-anchor-lang = "^0.22"
+anchor-lang = "^0.24"
 anchor-spl = "^0.22"
 num-traits = "0.2"
 vipers = "^2.0"
