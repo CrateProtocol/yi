@@ -89,5 +89,5 @@
     "tiny-invariant": "^1.2.0",
     "tslib": "^2.4.0"
   },
-  "packageManager": "yarn@3.1.1"
+  "packageManager": "yarn@3.2.0"
 }
