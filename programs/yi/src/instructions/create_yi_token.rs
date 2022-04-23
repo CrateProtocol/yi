@@ -18,6 +18,7 @@ pub struct CreateYiToken<'info> {
             mint.key().as_ref()
         ],
         bump,
+        space = 8 + YiToken::SIZE,
         payer = payer
     )]
     pub yi_token: AccountLoader<'info, YiToken>,

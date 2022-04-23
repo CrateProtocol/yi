@@ -2,6 +2,7 @@
 #![deny(missing_docs)]
 #![deny(clippy::integer_arithmetic)]
 
+use anchor_lang::solana_program::pubkey::PUBKEY_BYTES;
 use num_traits::ToPrimitive;
 
 use crate::*;
@@ -31,6 +32,9 @@ pub struct YiToken {
 }
 
 impl YiToken {
+    /// Number of bytes in a [YiToken].
+    pub const SIZE: usize = PUBKEY_BYTES + 1 + 7 + PUBKEY_BYTES * 2 + 4 + 4;
+
     /// Calculates the number of [YiToken::underlying_token_mint] tokens to mint for the given amount of [YiToken]s.
     pub fn calculate_underlying_for_yitokens(
         &self,
@@ -95,8 +99,15 @@ impl YiToken {
 #[cfg(test)]
 #[allow(clippy::unwrap_used, clippy::integer_arithmetic)]
 mod tests {
+    use std::mem::size_of;
+
     use super::*;
     use proptest::prelude::*;
+
+    #[test]
+    fn test_yitoken_size() {
+        assert_eq!(YiToken::SIZE, size_of::<YiToken>());
+    }
 
     #[test]
     fn test_calculate_yitokens_for_underlying_init() {

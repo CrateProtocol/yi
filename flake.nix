@@ -12,15 +12,17 @@
       "aarch64-darwin"
       "x86_64-linux"
       "x86_64-darwin"
-    ] (system:
-      let
-        pkgs = import nixpkgs { inherit system; };
-        saber-pkgs = saber-overlay.packages.${system};
-        ci = import ./ci.nix { inherit pkgs saber-pkgs; };
-      in {
-        packages.ci = ci;
-        devShell = pkgs.mkShell {
-          buildInputs = with pkgs; [ ci rustup cargo-deps gh cargo-readme ];
-        };
-      });
+    ]
+      (system:
+        let
+          pkgs = import nixpkgs { inherit system; };
+          saber-pkgs = saber-overlay.packages.${system};
+          ci = import ./ci.nix { inherit pkgs saber-pkgs; };
+        in
+        {
+          packages.ci = ci;
+          devShell = pkgs.mkShell {
+            buildInputs = with pkgs; [ ci rustup cargo-deps gh cargo-readme ];
+          };
+        });
 }
