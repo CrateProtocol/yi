@@ -4,7 +4,7 @@ pkgs.buildEnv {
   paths = with pkgs;
     with saber-pkgs;
     (pkgs.lib.optionals pkgs.stdenv.isLinux ([ libudev ])) ++ [
-      anchor-0_22_0
+      anchor-0_24_2
       cargo-workspaces
       solana-basic
 

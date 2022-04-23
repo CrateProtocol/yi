@@ -54,7 +54,7 @@ impl<'info> Unstake<'info> {
                 self.token_program.to_account_info(),
                 token::Burn {
                     mint: self.yi_mint.to_account_info(),
-                    to: self.source_yi_tokens.to_account_info(),
+                    from: self.source_yi_tokens.to_account_info(),
                     authority: self.source_authority.to_account_info(),
                 },
             ),
